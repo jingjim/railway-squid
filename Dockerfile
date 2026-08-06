@@ -1,7 +1,6 @@
 FROM ubuntu:24.04
 
 ENV DEBIAN_FRONTEND=noninteractive
-ENV PORT=3128
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends squid ca-certificates \
