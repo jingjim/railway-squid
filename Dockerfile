@@ -1,7 +1,14 @@
-FROM ubuntu/squid:6.13-25.04_beta
+FROM ubuntu:24.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+ENV PORT=3128
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends squid ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
 
 COPY squid.conf /etc/squid/squid.conf
 
 EXPOSE 3128
 
-CMD ["-f", "/etc/squid/squid.conf", "-NYC"]
+CMD ["/usr/sbin/squid", "-N", "-f", "/etc/squid/squid.conf"]
